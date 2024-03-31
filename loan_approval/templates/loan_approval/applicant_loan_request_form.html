@@ -1,0 +1,154 @@
+{% load static %}
+{% if user.is_authenticated %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLoan</title>
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/loan_request.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/loan_request_form_.css' %}" >
+    {% comment %} <link rel="stylesheet" href="{% static 'css/dummy.css'%}"> {% endcomment %}
+  </head>
+
+  <body>
+    <nav>
+      <div class="logos-section">
+        <h2 class="logo">
+            <a href="{% url 'loan_approval:index' %}">SmartLoan</a>
+        </h2>
+        <ul class="menu-items">
+          {% if user.is_authenticated %}
+          {% if user.applicant %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loan_request' %}">APPLY</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:applicant_loan_list' %}">REQUESTED LOANS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loans_details_list' %}">VIEW LOAN APPROVALS</a>
+          </li>
+          {% elif user.employee %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:employee_loan_list' %}">LOANS APPLIED BY APPLICANTS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loans_details_list' %}">PREDICTED LOANS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:visualize' %}">VISUALIZATION</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+          </li>
+          {% endif %}
+          {% else %}
+          <li>
+            <a href="{% url 'loan_approval:index' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:applicant_register' %}">APPLICANT REGISTER</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:employee_register' %}">EMPLOYEE REGISTER</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <ul class="cta-btns">
+        {% if user.is_authenticated %}
+        <li>
+          <div >{{request.user}} </div>
+        </li>
+        <li>
+          <a class="cta-btns1" href="{% url 'loan_approval:user_logout' %}">LOGOUT</a>
+        </li>
+        {% else %}
+        <li>
+          <a class="cta-btns1" href="{% url 'loan_approval:user_login' %}">LOGIN</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <main>
+      <div class="main_class">
+        <form method="post">
+          {% csrf_token %}
+          <h1 class="request_loan_header">MAKE A REQUEST FOR LOAN</h1>
+          <div class="form-group">
+              <label for="age">Age (In years) *</label>
+              {{form.person_age}}
+          </div>
+          {{form.person_age.errors}}
+          <div class="form-group">
+              <label for="intent">Intent *</label>
+              {{form.loan_intent}}
+          </div>
+          {{form.loan_intent.errors}}
+          <div class="form-group">
+              <label for="ownership">Ownership *</label>
+              {{form.home_ownership}}
+          </div>
+          {{form.home_ownership.errors}}
+          <div class="form-group">
+              <label for="income">Income (in $)*</label>
+              {{form.income}}
+          </div>
+          {{form.income.errors}}
+          <div class="form-group">
+              <label for="employment-length">Employment Length (in years)</label>
+              {{form.emp_length}}
+          </div>
+          {{form.emp_length.errors}}
+          <div class="form-group">
+              <label for="loan-amount">Loan Amount (in $)*</label>
+              {{form.loan_amount}}
+          </div>
+          {{form.loan_amount.errors}}
+          <div class="form-group">
+              <label for="additional-info">Loan Manager</label>
+              <!-- <textarea id="additional-info" name="additional-info"></textarea> -->
+              {{form.managed_by}}
+          </div>
+          {{form.managed_by.errors}}
+          <div class="form-group">
+            <input type="submit" value="Submit" class="submit-btn">
+          </div>
+      </form>
+  
+      <script src="javascript/loan_request.js"></script>
+      </div>
+
+    </main>
+
+    <!-- <footer>
+          <div class="attribution">
+            Copyright © SmartLoan 2023, All Right Reserved.
+          </div>
+        </footer> -->
+  </body>
+</html>
+{% endif %}

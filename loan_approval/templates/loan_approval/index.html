@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLoan</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <div class="logos-section">
+        <h2 class="logo">
+            <a href="{% url 'loan_approval:index' %}">SmartLoan</a>
+        </h2>
+        <ul class="menu-items">
+          {% if user.is_authenticated %}
+          {% if user.applicant %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loan_request' %}">APPLY</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:applicant_loan_list' %}">REQUESTED LOANS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loans_details_list' %}">VIEW LOAN APPROVALS</a>
+          </li>
+          {% elif user.employee %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:employee_loan_list' %}">LOANS APPLIED BY APPLICANTS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loans_details_list' %}">PREDICTED LOANS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:visualize' %}">VISUALIZATION</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+          </li>
+          {% endif %}
+          {% else %}
+          <li>
+            <a href="{% url 'loan_approval:index' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:applicant_register' %}">APPLICANT REGISTER</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:employee_register' %}">EMPLOYEE REGISTER</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:about' %}">ABOUT</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <ul class="cta-btns">
+        {% if user.is_authenticated %}
+        <li>
+          <div >{{request.user}} </div>
+        </li>
+        <li>
+          <a class="cta-btns1" href="{% url 'loan_approval:user_logout' %}">LOGOUT</a>
+        </li>
+        {% else %}
+        <li>
+          <a class="cta-btns1" href="{% url 'loan_approval:user_login' %}">LOGIN</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <main>
+      <section id="text-side">
+        <h1>SmartLoan <br />Get your loan in few minutes!</h1>
+        <p>SmartLoan is the easiest, safest and most trusted way to get loan.</p>
+        {% if not user.is_authenticated %}
+
+      <button
+      class="button"
+      onclick="window.location.href=`{% url 'loan_approval:user_login' %}`"
+    >
+      APPLY LOANS
+    </button>
+        {% else %}
+        {% if user.is_superuser %}
+        <button
+          class="button"
+          onclick="window.location.href=`admin/`"
+        >
+          ADMIN PANEL
+        </button>
+        {% elif user.is_staff %}
+        <button
+        class="button"
+        onclick="window.location.href=`{% url 'loan_approval:employee_loan_list' %}`"
+      >
+        PROVIDE LOAN DATA
+      </button>
+      {% else %}
+      <button
+      class="button"
+      onclick="window.location.href=`{% url 'loan_approval:loan_request' %}`"
+    >
+      APPLY LOANS
+    </button>
+        {% endif %}
+      {% endif%}
+      </section>
+
+      <section id="img-side">
+        <img class="desktop-img" src="{% static 'images/loan-approved-image.png' %}" />
+      </section>
+    </main>
+
+    <!-- <footer>
+          <div class="attribution">
+            Copyright © SmartLoan 2023, All Right Reserved.
+          </div>
+        </footer> -->
+  </body>
+</html>
+
+<!-- {% if user %}
+    {{user}} <br><br>
+{% endif %} -->

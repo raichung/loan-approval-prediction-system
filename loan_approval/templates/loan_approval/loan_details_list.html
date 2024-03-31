@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLoan - loan details list</title>
+    <link rel="stylesheet" href=" {% static 'css/loan_details_list_1.css' %} " />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>  
+    <nav>
+      <div class="logos-section">
+        <h2 class="logo">
+            <a href="{% url 'loan_approval:index' %}">SmartLoan</a>
+        </h2>
+        <ul class="menu-items">
+          {% if user.is_authenticated %}
+          {% if user.applicant %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loan_request' %}">APPLY</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:applicant_loan_list' %}">REQUESTED LOANS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loans_details_list' %}">VIEW LOAN APPROVALS</a>
+          </li>
+          {% elif user.employee %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:employee_loan_list' %}">LOANS APPLIED BY APPLICANTS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loans_details_list' %}">PREDICTED LOANS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:visualize' %}">VISUALIZATION</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+          </li>
+          {% endif %}
+          {% else %}
+          <li>
+            <a href="{% url 'loan_approval:index' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:applicant_register' %}">APPLICANT REGISTER</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:employee_register' %}">EMPLOYEE REGISTER</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <ul class="cta-btns">
+        {% if user.is_authenticated %}
+        <li>
+          <div >{{request.user}} </div>
+        </li>
+        <li>
+          <a class="cta-btns1" href="{% url 'loan_approval:user_logout' %}">LOGOUT</a>
+        </li>
+        {% else %}
+        <li>
+          <a class="cta-btns1" href="{% url 'loan_approval:user_login' %}">LOGIN</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    {% if user.is_authenticated %}
+    {% if not request.user.is_superuser %}
+    <table id="loan-prediction">
+      <h2>LOAN APPROVAL LIST</h2>
+      <thead>
+        <tr>
+            {% if request.user.applicant %}
+            <td>Requested Applicants Name</td>
+            <td> Loan Manager </td>
+            <td>Applicant Employment Length</td>
+            <td>Intention of Loan</td>
+            <td>Amount Applied</td>
+            <td> Prediction Approval </td>
+            <td>Loan Details</td>
+            {% endif %}
+            {% if request.user.employee %}
+            <td>Requested Applicants Name</td>
+            <td>Applicant Employment Length</td>
+            <td>Intention of Loan</td>
+            <td>Amount Applied</td>
+            <td>Credit History</td>
+            <td>Credit Default</td>
+            <td>Loan Interest Rate</td>
+            <td> Prediction Approval </td>
+            <td>Loan Details</td>
+            {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for object in object_list %}
+    <tr>
+    {% if request.user.applicant %}
+    <td>{{ object.loan_request.applicant_details }}</td>
+    <td> {{ object.loan_request.managed_by }} </td>
+    <td>{{ object.loan_request.emp_length }}</td>
+    <td>{{ object.loan_request.loan_intent }}</td>
+    <td>{{ object.loan_request.loan_amount }}</td>
+    {% comment %} <td><a href="{% url 'loan_approval:predict' pk=object.loan_request.id%}">Details</a></td> {% endcomment %}
+    <td>
+        <input type="button" class="predict-button-{{object.loan_request.id}} button" value="Predict"
+        onclick="submit({id: {{object.loan_request.id}}})" />
+<h3 class="hello-{{object.loan_request.id}}"></h3>
+    </td>
+    <td><a class="loan-details" href="{% url 'loan_approval:loan_details_detail' pk=object.id%}">Details</a></td>
+    {% endif %}
+    {% if request.user.employee %}
+    <td>{{ object.loan_request.applicant_details }}</td>
+    <td>{{ object.loan_request.emp_length }}</td>
+    <td>{{ object.loan_request.loan_intent }}</td>
+    <td>{{ object.loan_request.loan_amount }}</td>
+    <td>{{ object.credit_history }}</td>
+    <td>{{ object.credit_default }}</td>
+    <td>{{ object.interest_rate }}</td>
+    <td> <input type="button" class="predict-button-{{object.loan_request.id}} button" value="Predict"
+        onclick="submit({id: {{object.loan_request.id}}})" />
+<h3 class="hello-{{object.loan_request.id}}"></h3></td>
+    <td><a class="loan-details" href="{% url 'loan_approval:loan_details_detail' pk=object.id%}">Details</a></td>
+    {% endif %}
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+403 Error: Not authorized
+{% endif %}
+{% else %}
+404 Error 
+{% endif %}
+    <script src="{% static 'js/script.js' %} "></script>
+  </body>
+</html>
+
+<script>
+    function submit({
+        id
+    }) {
+        fetch(`/loan/predict/${id}/`)
+            .then(response => response.json())
+            .then(data => manipulate(data,id))
+    };
+    function manipulate(data,id){
+        console.log(data);
+        //console.log(id);
+        prediction_button = document.querySelector(`.predict-button-${id}`);
+        //console.log(`predict-button-${id}`);
+        //console.log(prediction_button);
+        prediction = document.querySelector(`.hello-${id}`);
+        //console.log(prediction)
+        console.log(data['prediction']);
+        prediction_button.style.display = "none";
+        if(data['prediction']==false){
+            prediction.innerText = "Rejected.";    
+        }
+        else{
+            prediction.innerText = "Approved.";
+        }
+        //
+        //document.querySelector('.beruju_hide').style.display = "block";
+    }
+</script>
+
+
+

@@ -1,0 +1,86 @@
+* {
+  /*   background-color: rgb(185, 236, 169);
+ */
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+}
+
+.logo a {
+  font-size: 1.4rem;
+  color: #ff5e78;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+nav,
+.cta-btns,
+.menu-items {
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  margin: 0 1.5rem 1.5rem 1.5rem;
+  justify-content: space-between;
+}
+
+.logos-section {
+  display: flex;
+}
+
+.menu-items li,
+.cta-btns li {
+  font-size: 0.9rem;
+  margin-right: 1.5rem;
+  color: #c850c0;
+}
+
+.menu-items li a {
+  position: relative;
+  font-size: 0.8rem;
+  margin-right: 1.5rem;
+  color: #c850c0;
+  text-decoration: none;
+}
+
+.menu-items li a:hover {
+  color: #ff5e78;
+}
+
+/* Underline link */
+.menu-items li a::after {
+  content: '';
+  background: linear-gradient(to right, #ff5e78, #c850c0);
+  height: 1.5px;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  bottom: -5px;
+  opacity: 0;
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.menu-items li a:hover::after,
+.menu-items li a:focus::after {
+  opacity: 1;
+}
+
+.cta-btns1,
+.cta-btns2 {
+  font-size: 0.8rem;
+  text-decoration: none;
+  border: 2px solid #c850c0;
+  padding: 0.2rem 0.7rem;
+  border-radius: 0.9rem;
+}
+
+.cta-btns1:hover,
+.cta-btns2:hover {
+  color: #ff5e78;
+  border: 2px solid #ff5e78;
+}
+

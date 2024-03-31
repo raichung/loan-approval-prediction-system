@@ -1,0 +1,58 @@
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.parent{
+    display:flex;
+    flex:1;
+}
+.visual-form{
+    border-right:1px solid #ebdde8;
+    width: 50%;
+    padding:5%;
+    height:100vh;
+}
+.visual-selector{
+    padding-left:20%;
+    padding-top:5%;
+    padding-bottom: 5%;
+}
+.h3,.chart-info{
+    color: #c850c0;
+    font-size:1.5rem;
+    text-align: center;
+}
+.type{
+    width:50%;
+    font-size:1.5rem;
+    border: #ebdde8 solid 1px;
+    outline:0px;
+}
+.chart-info{
+    padding-bottom: 2rem;
+    margin: 0 auto;
+}
+.canvas{
+    width: 50%;
+    padding:5%;
+    /* border: 2px solid #ebdde8; */
+}
+.button {
+    background: linear-gradient(to right, #ff5e78, #c850c0);
+    color: #ebdde8;
+    border: none;
+    font-size: 1rem;
+    border-radius: 1.4rem;
+    margin-top: 1rem;
+    width:10rem;
+    padding:0.8rem;
+    margin-left: 25%;
+  }
+  .error{
+    margin-left: 25%;
+  }
+  
+  .button:hover {
+    color: rgb(114, 5, 94);
+  }

@@ -1,0 +1,165 @@
+{% if user.is_authenticated %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan data</title>
+  <link rel="stylesheet" href="{% static 'css/provide_loan_data_.css' %} ">
+  <link rel="stylesheet" href="{% static 'css/style4.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/loan_request_.css'%}" />
+</head>
+
+<body>
+  <nav>
+    <div class="logos-section">
+      <h2 class="logo">
+        <a href="{% url 'loan_approval:index' %}">SmartLoan</a>
+      </h2>
+      <ul class="menu-items">
+        {% if user.is_authenticated %} {% if user.applicant %}
+        <li>
+          <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:loan_request' %}">APPLY</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:applicant_loan_list' %}">REQUESTED LOANS</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:loans_details_list' %}">VIEW LOAN APPROVALS</a>
+        </li>
+        {% elif user.employee %}
+        <li>
+          <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:employee_loan_list' %}">LOANS APPLIED BY APPLICANTS</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:loans_details_list' %}">PREDICTED LOANS</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:visualize' %}">VISUALIZATION</a>
+        </li>
+        {% else %}
+        <li>
+          <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+        </li>
+        {% endif %} {% else %}
+        <li>
+          <a href="{% url 'loan_approval:index' %}">HOME</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:applicant_register' %}">APPLICANT REGISTER</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:employee_register' %}">EMPLOYEE REGISTER</a>
+        </li>
+        <li>
+          <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    <ul class="cta-btns">
+      {% if user.is_authenticated %}
+      <li>
+        <div>{{request.user}}</div>
+      </li>
+      <li>
+        <a class="cta-btns1" href="{% url 'loan_approval:user_logout' %}">LOGOUT</a>
+      </li>
+      {% else %}
+      <li>
+        <a class="cta-btns1" href="{% url 'loan_approval:user_login' %}">LOGIN</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  {% if not user.is_superuser %}
+  {% if user.is_staff %}
+  <div class="mortgage-container">
+    <div class="mortgage-details">
+      <h2>LOAN DETAILS</h2>
+      <p><b>Applicant Home Ownership:</b> {{home_ownership}}</p>
+      <p><b>Applicant Employment Length: (In years)</b> {{emp_length}}</p>
+      <p><b>Loan Amount(In $):</b> {{loan_amount}}</p>
+      <p><b>Applicant Age (In years):</b> {{person_age}}</p>
+      <p><b>Applicant's Income (In $):</b> {{income}}</p>
+      <p><b>Loan Purpose:</b> {{loan_intent}}</p>
+    </div>
+    <div class="credit-form">
+      <h2>CREDIT INFORMATION</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="credit-history">Credit History (In years):</label><br>
+          <input type="text" id="credit-history" name="credit_history">
+          <!-- Error handling for credit history if needed -->
+        </div>
+        <!-- <div class="form-group">
+                <label for="credit-default">Credit Default:</label><br>
+                <input type="text" id="credit-default" name="credit_default"><br>
+            </div> -->
+        <div class="form-group">
+          <label for="credit-default">Credit Default:</label><br>
+          <select id="credit-default" name="credit_default" style="width: 100%;">
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select><br>
+          <div class="form-group">
+            <label for="interest-rate">Interest Rate (In %):</label><br>
+            <input type="text" id="interest-rate" name="interest_rate"><br>
+            <!-- Error handling for interest rate if needed -->
+          </div>
+          <!-- <div class="form-group">
+                <label for="grade">Grade:</label><br>
+                <input type="text" id="grade" name="grade"><br>
+            </div> -->
+          <div class="form-group">
+            <label for="grade">Grade:</label><br>
+            <select id="grade" name="grade" style="width: 100%;">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+            </select><br>
+            <!-- Error handling for grade if needed -->
+          </div>
+          <!-- <div class="form-group">
+                <label for="loan-income-percent">Loan Percent to Income:</label><br>
+                <input type="text" id="loan-income-percent" name="loan_percent_to_income"><br>
+            </div> -->
+          <div class="form-group">
+            <button type="submit">Submit</button>
+          </div>
+      </form>
+
+    </div>
+  </div>
+  {% else %}
+  <h3> 403 Error: Applicant and superadmin are not allowed to provide loan information.</h3>
+  {% endif %}
+  {% else %}
+  <h3> 403 Error: Applicant and superadmin are not allowed to provide loan information.</h3>
+  {% endif %}
+</body>
+
+</html>
+{% endif %}

@@ -1,0 +1,143 @@
+{% if user.is_authenticated %}
+{% if not user.is_superuser %}
+{% if user.is_staff %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% static 'js/visualize.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href=" {% static 'css/visualize_.css' %} "/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/loan_request_.css'%}" />
+    <title> Visualization</title>
+</head>
+<body>
+    <nav>
+        <div class="logos-section">
+          <h2 class="logo">
+            <a href="{% url 'loan_approval:index' %}">SmartLoan</a>
+          </h2>
+          <ul class="menu-items">
+            {% if user.is_authenticated %} {% if user.applicant %}
+            <li>
+              <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:loan_request' %}">APPLY</a>
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:applicant_loan_list' %}"
+                >REQUESTED LOANS</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:loans_details_list' %}"
+                >VIEW LOAN APPROVALS</a
+              >
+            </li>
+            {% elif user.employee %}
+            <li>
+              <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:employee_loan_list' %}"
+                >LOANS APPLIED BY APPLICANTS</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:loans_details_list' %}"
+                >PREDICTED LOANS</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:visualize' %}">VISUALIZATION</a>
+            </li>
+            {% else %}
+            <li>
+              <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+            </li>
+            {% endif %} {% else %}
+            <li>
+              <a href="{% url 'loan_approval:index' %}">HOME</a>
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:applicant_register' %}"
+                >APPLICANT REGISTER</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:employee_register' %}"
+                >EMPLOYEE REGISTER</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        <ul class="cta-btns">
+          {% if user.is_authenticated %}
+          <li>
+            <div>{{request.user}}</div>
+          </li>
+          <li>
+            <a class="cta-btns1" href="{% url 'loan_approval:user_logout' %}"
+              >LOGOUT</a
+            >
+          </li>
+          {% else %}
+          <li>
+            <a class="cta-btns1" href="{% url 'loan_approval:user_login' %}"
+              >LOGIN</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+
+    <div class="parent">
+        <div class="visual-form">
+            <div class="h3"> Visualize Loans Based on properties</div>
+            <div class="visual-selector">
+                <select name="type" id="type" class="type">
+                    <option value="0">-----</option>
+                    <option value="1">Credit History</option>
+                    <option value="2">Loan Predictions</option>
+                    <option value="3">Home Ownership</option>
+                    <option value="4">Loan Intent</option>
+                </select>
+            </div>
+            <div class="error"></div>
+            <input type="submit" value="Visualize Loan" onclick="submit_form()" class="button">
+        </div>
+<!-- </form> -->
+        <div class="canvas">
+            <div class="chart-info"></div>
+            <canvas id="myChart" width="100" height="100"></canvas>
+        </div>
+    </div>
+</body>
+</html>
+{% else %}
+403 Error :User not authorized.
+{% endif %}
+{% else %}
+403 Error :User not authorized.
+{% endif %}
+{% else %}
+404 Error: Cannot view this Page.
+{% endif %}

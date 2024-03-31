@@ -1,0 +1,18 @@
+31-Mar-24 14:55:26 root - INFO - Logger started.
+31-Mar-24 14:55:26 root - INFO - Reading csv file from data column.
+31-Mar-24 14:55:30 root - INFO - Logger started.
+31-Mar-24 14:55:30 root - INFO - Reading csv file from data column.
+31-Mar-24 14:56:09 root - INFO - Logger started.
+31-Mar-24 14:56:09 root - INFO - Reading csv file from data column.
+31-Mar-24 14:56:13 root - INFO - Logger started.
+31-Mar-24 14:56:13 root - INFO - Reading csv file from data column.
+31-Mar-24 14:56:40 django.request - WARNING - Not Found: /loan/request/javascript/loan_request.js
+31-Mar-24 14:57:01 django.request - WARNING - Not Found: /loan/list/javascript/loan_request.js
+31-Mar-24 14:57:07 root - INFO - Logger started.
+31-Mar-24 14:57:07 root - INFO - Reading csv file from data column.
+31-Mar-24 14:57:38 django.request - WARNING - Not Found: /loan/request/javascript/loan_request.js
+31-Mar-24 14:57:57 django.request - WARNING - Not Found: /loan/list/javascript/loan_request.js
+31-Mar-24 14:58:16 root - INFO - Logger started.
+31-Mar-24 14:58:16 root - INFO - Reading csv file from data column.
+31-Mar-24 14:58:28 root - INFO - Logger started.
+31-Mar-24 14:58:28 root - INFO - Reading csv file from data column.

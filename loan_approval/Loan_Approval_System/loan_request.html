@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Request Fom</title>
+    <link rel="stylesheet" href="css/loan_request.css">
+</head>
+
+<body>
+    <form class="loan-request-form">
+        <h2>MAKE A REQUEST FOR LOAN</h2>
+        <div class="form-group">
+            <label for="age">Age *</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+        <div class="form-group">
+            <label for="intent">Intent *</label>
+            <select id="intent" name="intent" required>
+                <option value=""></option>
+                <option value="Personal">Personal</option>
+                <option value="Business">Business</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ownership">Ownership *</label>
+            <select id="ownership" name="ownership" required>
+                <option value=""></option>
+                <option value="Own">Own</option>
+                <option value="Rent">Rent</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="income">Income *</label>
+            <input type="number" id="income" name="income" required>
+        </div>
+        <div class="form-group">
+            <label for="employment-length">Employment Length</label>
+            <input type="number" id="employment-length" name="employment-length" required>
+        </div>
+        <div class="form-group">
+            <label for="loan-amount">Loan Amount *</label>
+            <input type="number" id="loan-amount" name="loan-amount" required>
+        </div>
+        <div class="form-group">
+            <label for="additional-info">Additional Information</label>
+            <textarea id="additional-info" name="additional-info"></textarea>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script src="javascript/loan_request.js"></script>
+
+</body>
+
+</html>

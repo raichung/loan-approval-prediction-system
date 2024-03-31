@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Request Fom</title>
+    <link rel="stylesheet" href="{% static 'css/loan_request.css' %}" >
+</head>
+
+<body>
+    {% if not user.is_staff %}
+        <form method="post">
+            {% csrf_token %}
+            <h2>UPDATE LOANS</h2>
+                <div class="form-group">
+                <label for="age">Age (In Years)*</label>
+                {{form.person_age}}
+            </div>
+            {{form.person_age.errors}}
+            <div class="form-group">
+                <label for="intent">Intent *</label>
+                {{form.loan_intent}}
+            </div>
+            {{form.loan_intent.errors}}
+            <div class="form-group">
+                <label for="ownership">Ownership *</label>
+                {{form.home_ownership}}
+            </div>
+            {{form.home_ownership.errors}}
+            <div class="form-group">
+                <label for="income">Income (In $)*</label>
+                {{form.income}}
+            </div>
+            {{form.income.errors}}
+            <div class="form-group">
+                <label for="employment-length">Employment Length (In Years)</label>
+                {{form.emp_length}}
+            </div>
+            {{form.emp_length.errors}}
+            <div class="form-group">
+                <label for="loan-amount">Loan Amount (In $) *</label>
+                {{form.loan_amount}}
+            </div>
+            {{form.loan_amount.errors}}
+            <div class="form-group">
+                <label for="additional-info">Loan Manager</label>
+                <!-- <textarea id="additional-info" name="additional-info"></textarea> -->
+                {{form.managed_by}}
+            </div>
+            {{form.managed_by.errors}}
+            <input type="submit" value="Submit">
+        </form>
+        {% else %}
+<h3>Employee or Super User cannot update the record</h3>
+{% endif %}
+
+    <script src="javascript/loan_request.js"></script>
+
+</body>
+</html>

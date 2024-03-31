@@ -1,0 +1,147 @@
+{% load static %}
+{% if user.is_authenticated %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLoan</title>
+    <link rel="stylesheet" href="{% static 'css/style4.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/loan_request_.css'%}">
+  </head>
+
+  <body>
+    <nav>
+      <div class="logos-section">
+        <h2 class="logo">
+            <a href="{% url 'loan_approval:index' %}">SmartLoan</a>
+        </h2>
+        <ul class="menu-items">
+          {% if user.is_authenticated %}
+          {% if user.applicant %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loan_request' %}">APPLY</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:applicant_loan_list' %}">REQUESTED LOANS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loans_details_list' %}">VIEW LOAN APPROVALS</a>
+          </li>
+          {% elif user.employee %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:employee_loan_list' %}">LOANS APPLIED BY APPLICANTS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:loans_details_list' %}">PREDICTED LOANS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:visualize' %}">VISUALIZATION</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'loan_approval:dashboard' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+          </li>
+          {% endif %}
+          {% else %}
+          <li>
+            <a href="{% url 'loan_approval:index' %}">HOME</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:working' %}">HOW IT WORKS</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:applicant_register' %}">APPLICANT REGISTER</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:employee_register' %}">EMPLOYEE REGISTER</a>
+          </li>
+          <li>
+            <a href="{% url 'loan_approval:contact' %}">CONTACT</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <ul class="cta-btns">
+        {% if user.is_authenticated %}
+        <li>
+          <div >{{request.user}} </div>
+        </li>
+        <li>
+          <a class="cta-btns1" href="{% url 'loan_approval:user_logout' %}">LOGOUT</a>
+        </li>
+        {% else %}
+        <li>
+          <a class="cta-btns1" href="{% url 'loan_approval:user_login' %}">LOGIN</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <main>
+
+    {% if not user.is_staff %}
+    <table id="loan-prediction">
+        <h2>APPLICANT LOAN LIST</h2>
+        <thead>
+          <tr>
+            <th class="bor-le">SN</th>
+            <th>Applicant Name</th>
+            <th>Home Ownership</th>
+            <th>Employee Length (In Years)</th>
+            <th>Loan Amount (In $)</th>
+            <th>Manager</th>
+            <th class="bor-ri"> Action </th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <!-- Display Objects -->
+                {% if not object.loandetails %}
+                <tr>
+                    <td>1</td>
+                    <td>{{object.applicant_details}}</td>
+                    <td>{{object.home_ownership}}</td>
+                    <td>{{object.emp_length}}</td>
+                    <td>{{object.loan_amount}}</td>
+                    <td>{{object.managed_by}}</td>
+                    <td>
+                        <a class="button" href="{% url 'loan_approval:loan_update' object.id %}">Update</a>
+                        <a class="button" href="{% url 'loan_approval:loan_delete' object.id %}">Delete</a>    
+                    </td>
+                  </tr>
+                {% endif%}
+            {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+    <h3>Employee or super admin cannot request loans.</h3>
+    {% endif%}  
+<script src="javascript/loan_request.js"></script>
+</body>
+</html>
+{% else %}
+{% endif %}
+
+    </main>
+
+    <!-- <footer>
+          <div class="attribution">
+            Copyright © SmartLoan 2023, All Right Reserved.
+          </div>
+        </footer> -->
+  </body>
+</html>

@@ -1,0 +1,73 @@
+/* nav{
+    font-size:5rem;   
+} */
+.logo a{
+    font-size:2rem;
+}
+
+table{
+    border:1rem dotted white;
+    border-radius: 2rem;
+}
+thead{
+    background-color: #ba68c8;
+    color:white;
+}
+thead th{
+    padding:1rem;
+}
+tr:nth-child(even) {
+    background-color: #eeeeee;
+  }
+td{ 
+    padding:1rem;
+}
+
+.button {
+    background: linear-gradient(to right, #ff5e78, #c850c0);
+    color: #ebdde8;
+    border: none;
+    font-size: 1rem;
+    border-radius: 1.4rem;
+    margin-top: 1rem;
+    width:10rem;
+    padding:0.8rem;
+    margin-left: 25%;
+  }
+  .error{
+    margin-left: 25%;
+  }
+  
+  .button:hover {
+    color: rgb(114, 5, 94);
+  }
+.menu-items{
+    font-size: 1rem !important;
+}
+li a{
+    font-size: 1rem !important;
+}
+.cta-btns li{
+    font-size: 1.3rem !important;
+}
+
+
+.main_class{
+    font-weight: 100;
+}
+form{
+    padding-left:20%;
+    padding-right:20%;
+    padding-top:2%; 
+}
+.form-group{
+    padding:1rem;
+}
+.request_loan_header{
+    font-size: 2rem;
+    text-align: center;
+    color: #111;
+}
+.submit-btn{
+    margin: 0 auto;
+}

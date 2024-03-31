@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - SmartLoan</title>
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}" />
+  </head>
+  <body>
+    <header>
+      <h1>ABOUT US</h1>
+      <p>
+        SmartLoan is a user-friendly, fully online lending platform that offers
+        loans to our esteemed customers. With our efficient application process,
+        you can apply for loan 24 hours a day, 7 days a week, and receive a
+        prompt decision. We are committed to providing assistance to you when
+        you require it, so you can have peace of mind that we will be there for
+        you during times of need.
+      </p>
+    </header>
+
+    <h2>OUR TEAM MEMBERS</h2>
+    <main>
+      <section class="team-member">
+        <img src="{% static 'images/raichung_profile.jpg' %}" alt="Raichung Pun Magar" style="object-fit: cover;" />
+        <h3>Raichung Pun Magar</h3>
+        <p>Software Developer</p>
+      </section>
+
+      <section class="team-member">
+        <img src="{% static 'images/nisha_profile.jpeg' %}" alt="Ankit Lamsal" />
+        <h3>Nisha Subedi</h3>
+        <p>Software Developer</p>
+      </section>
+
+      <section class="team-member">
+        <img src="{% static 'images/abishek_profile.jpeg' %}" alt="Sujan Paudel" />
+        <h3>Abishek Gautam</h3>
+        <p>DevOps Engineer</p>
+      </section>
+    </main>
+  </body>
+</html>

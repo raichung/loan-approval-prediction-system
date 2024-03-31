@@ -1,0 +1,75 @@
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+table {
+  position: absolute;
+  z-index: 2;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  box-shadow: 0 2px 12px reba(32, 32, 32, 0.3);
+  background-color: #fafafa;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 2000;
+  height: 150px;
+}
+
+h2 {
+  text-align: center;
+  color: #ff5e78;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+
+th {
+  font-size: 1rem;
+  background: #ba68c8;
+  color: #fafafa;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+}
+
+td {
+  font-size: 1rem;
+  font-family: "Open Sans", sans-serif;
+}
+tr:nth-child(odd) {
+  background-color: #eeeeee;
+}
+
+/* Apply styles for small screens */
+@media screen and (max-width: 600px) {
+  table {
+    font-size: 14px;
+  }
+}
+thead tr td{
+  background: #ba68c8;
+  color: #fafafa;
+}
+
+.button {
+  background: linear-gradient(to right, #ff5e78, #c850c0);
+  color: #ebdde8;
+  text-decoration: none;
+  border: none;
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  border-radius: 1.4rem;
+  margin-top: 1rem;
+}
+
+.button:hover {
+  color: rgb(114, 5, 94);
+}
+.loan-details{
+  text-decoration: none;
+  color: #ba68c8;
+}

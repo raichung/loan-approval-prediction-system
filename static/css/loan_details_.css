@@ -1,0 +1,72 @@
+* {
+    font-family: "Poppins", sans-serif;
+  
+  }
+
+h2 {
+    text-align: center;
+    color: #ff5e78;
+}
+p {
+  font-size: 1rem;
+  color: #c850c0;
+}
+
+b {
+  color: #322020;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin: auto;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  .mortgage-container {
+    text-align: center;
+  }
+  .mortgage-details {
+    display: inline-block;
+    text-align: left;
+  }
+  
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 5px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    background: linear-gradient(to right, #ff5e78, #c850c0);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 1.4rem;
+    cursor: pointer;
+  }
+  
+  #result {
+    display: none;
+    margin-top: 20px;
+    width: 400px;
+    margin: auto;
+  }
+  
+  #result h3 {
+    font-weight: bold;
+  }
+  
+  #result p {
+    margin: 5px 0;
+  }
+  

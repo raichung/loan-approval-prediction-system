@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Register</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="title">EMPLOYEE REGISTER</div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="field">
+          <!-- <input type="text" required /> -->
+          {{form.username}}
+          <label>Username</label>
+        </div>
+        {% if  form.username.errors %}
+        <br>
+        {{form.username.errors}}
+        <br>
+        {% endif %}
+        <div class="field">
+          <!-- <input type="text" required /> -->
+          {{form.email}}
+          <label>Email Address</label>
+        </div>
+
+        {% if  form.email.errors %}
+        <br>
+        {{form.email.errors}}
+        <br>
+        {% endif %}
+        <div class="field">
+          {{form.password1}}
+          <label>Password</label>
+        </div>
+        
+        {% if form.password1.errors %}
+        <br>
+        {{form.password1.errors}}
+        <br>
+        {% endif %}
+          
+        <div class="field">
+          {{form.password2}}
+          <label>Confirm Password</label>
+        </div>
+        {% if form.password2.errors %}
+          <br>
+          {{form.password2.errors}}
+          <br>
+          {% endif %}
+          <div class="content">
+          <div class="checkbox">
+            <input type="checkbox" id="remember-me" />
+            <label for="remember-me">Agree to terms and conditions</label>
+          </div>
+          <div class="pass-link"><a href="#"></a></div>
+        </div>
+        <div class="field">
+          <input type="submit" value="Register" />
+        </div>
+        <div class="signup-link">Already a member? <a href="{% url 'loan_approval:user_login' %}">LOGIN</a></div>
+        <div class="signup-link"><a href="{% url 'loan_approval:index' %}">Back to HOME PAGE</a></div>
+        </form>
+    </div>
+
+    <script src="{% static 'javascript/signup.js' %}"></script>
+  </body>
+</html>
+
+<!-- <form method="post">
+  {% csrf_token %} {{form}}
+  <input type="submit" value="submit" />
+</form> -->

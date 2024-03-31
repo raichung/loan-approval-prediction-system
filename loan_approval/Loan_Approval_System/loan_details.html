@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLoan - Loan details</title>
+    <link rel="stylesheet" href="css/loan_details.css">
+</head>
+<body>
+    <form>
+        <h2>LOAN DETAILS</h2>
+        <label for="credit-history">Credit History:</label>
+        <select id="credit-history" name="credit-history">
+          <option value="excellent">Excellent</option>
+          <option value="good">Good</option>
+          <option value="fair">Fair</option>
+          <option value="poor">Poor</option>
+        </select>
+        <label for="interest-rate">Interest Rate:</label>
+        <input type="number" id="interest-rate" name="interest-rate" step="0.01" min="0" required>
+        <label for="grade">Grade:</label>
+        <select id="grade" name="grade">
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+        </select>
+        <label for="loan-percent-to-income">Loan Percent to Income:</label>
+        <input type="number" id="loan-percent-to-income" name="loan-percent-to-income" step="0.01" min="0" required>
+        <label for="loan-request-home">Loan Request Home:</label>
+        <input type="number" id="loan-request-home" name="loan-request-home" step="0.01" min="0" required>
+        <button type="submit">SUBMIT</button>
+      </form>
+      
+      <div id="result"></div>
+       
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <link rel="stylesheet" href=" {% static 'css/login.css' %}" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="title">LOGIN</div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="field">
+          {{form.username}}
+          <label>Username</label>
+        </div>
+        <div class="field">
+          {{form.password}}
+          <label>Password</label>
+        </div>
+        <div class="content">
+          <div class="checkbox">
+            <input type="checkbox" id="remember-me" />
+            <label for="remember-me">Remember me</label>
+          </div>
+          <div class="pass-link"><a href="#">Forgot password?</a></div>
+        </div>
+        <div class="field">
+          <input type="submit" value="Login" />
+        </div>
+        <div class="signup-link">New to system ? <br>
+          <a href="{% url 'loan_approval:employee_register' %}">EMPLOYEE REGISTRATION</a> <br>
+          <a href="{% url 'loan_approval:applicant_register' %}">APPLICANT REGISTRATION</a><br>
+          <a href="{% url 'loan_approval:index' %}">Back to HOME PAGE</a>
+        </div>
+        <br>
+        {% for error in form.non_field_errors %}
+             <p>{{ error }}</p>
+        {% endfor %}
+
+      </form>
+    </div>
+
+    {% comment %} <script src="javascript/login.js"></script> {% endcomment %}
+  </body>
+</html>

@@ -1,0 +1,40 @@
+main{
+    display:flex;
+    flex-direction: column;
+    height: 10vh;   
+}
+h2 {
+    text-align: center;
+    color: #ff5e78;
+}
+thead{
+    background-color: #ba68c8;
+    color:white;
+}
+thead th{
+    font-size: 1rem;
+    padding:1rem;
+}
+tr:nth-child(even) {
+    background-color: #eeeeee;
+  }
+td{ 
+    font-size: 1rem;
+    padding:1rem;
+}
+.button {
+    background: linear-gradient(to right, #ff5e78, #c850c0);
+    color: #ebdde8;
+    border: none;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    border-radius: 1.4rem;
+    margin-top: 1rem;
+    text-decoration: none;
+  }
+  .bor-le{
+    border-top-left-radius: 1rem;
+}
+.bor-ri{
+    border-top-right-radius: 1rem;
+}
