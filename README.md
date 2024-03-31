@@ -1,4 +1,4 @@
-# Project Title
+# SmartLoan
 
 SmartLoan is the easiest, safest and most trusted way to get loan.
 
